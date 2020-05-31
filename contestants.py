@@ -45,38 +45,38 @@ def create_contestant_profiles(podiumFile,tournamentsFile):
 			contestant1_name = row[4]
 			contestant1_correct = int(row[8])
 			contestant1_incorrect = int(row[9])
-			contestant1_J_correct = int(row[14])
-			contestant1_J_incorrect = int(row[15])
-			contestant1_DJ_correct = int(row[16])
-			contestant1_DJ_incorrect = int(row[17])
-			contestant1_FJ_correct = int(row[18])
-			contestant1_FJ_incorrect = int(row[19])
-			contestant1_Tie_correct = int(row[20])
-			contestant1_Tie_incorrect = int(row[21])
+			contestant1_J_correct = int(row[29])
+			contestant1_J_incorrect = int(row[30])
+			contestant1_DJ_correct = int(row[31])
+			contestant1_DJ_incorrect = int(row[32])
+			contestant1_FJ_correct = int(row[33])
+			contestant1_FJ_incorrect = int(row[34])
+			contestant1_Tie_correct = int(row[35])
+			contestant1_Tie_incorrect = int(row[36])
 
 			contestant2_name = row[5]
 			contestant2_correct = int(row[10])
 			contestant2_incorrect = int(row[11])
-			contestant2_J_correct = int(row[22])
-			contestant2_J_incorrect = int(row[23])
-			contestant2_DJ_correct = int(row[24])
-			contestant2_DJ_incorrect = int(row[25])
-			contestant2_FJ_correct = int(row[26])
-			contestant2_FJ_incorrect = int(row[27])
-			contestant2_Tie_correct = int(row[28])
-			contestant2_Tie_incorrect = int(row[29])
+			contestant2_J_correct = int(row[37])
+			contestant2_J_incorrect = int(row[38])
+			contestant2_DJ_correct = int(row[39])
+			contestant2_DJ_incorrect = int(row[40])
+			contestant2_FJ_correct = int(row[41])
+			contestant2_FJ_incorrect = int(row[42])
+			contestant2_Tie_correct = int(row[43])
+			contestant2_Tie_incorrect = int(row[44])
 
 			contestant3_name = row[6]
 			contestant3_correct = int(row[12])
 			contestant3_incorrect = int(row[13])
-			contestant3_J_correct = int(row[30])
-			contestant3_J_incorrect = int(row[31])
-			contestant3_DJ_correct = int(row[32])
-			contestant3_DJ_incorrect = int(row[33])
-			contestant3_FJ_correct = int(row[34])
-			contestant3_FJ_incorrect = int(row[35])
-			contestant3_Tie_correct = int(row[36])
-			contestant3_Tie_incorrect = int(row[37])
+			contestant3_J_correct = int(row[45])
+			contestant3_J_incorrect = int(row[46])
+			contestant3_DJ_correct = int(row[47])
+			contestant3_DJ_incorrect = int(row[48])
+			contestant3_FJ_correct = int(row[49])
+			contestant3_FJ_incorrect = int(row[50])
+			contestant3_Tie_correct = int(row[51])
+			contestant3_Tie_incorrect = int(row[52])
 
 			#Being in appearances automatically means they'll be in accuracies
 			if contestant1_name in appearances:
@@ -160,34 +160,38 @@ def create_contestant_profiles(podiumFile,tournamentsFile):
 												contestant3_Tie_correct,contestant3_Tie_incorrect]
 
 		for contestant in appearances:
-			print(contestant)
+			#################################
+			#Change the else case for accuracies to return -1 instead of strings???
+			#################################
+			
 			#Special cases because they may not play in Final Jeopardy/Tiebreaker
-			finalJeopardyAccuracy = 100*float(accuracies[contestant][6])/(float(accuracies[contestant][6])+float(accuracies[contestant][7])) if accuracies[contestant][6]+accuracies[contestant][7]!=0 else "Did Not Play"
-			tiebreakerAccuracy = 100*float(accuracies[contestant][8])/(float(accuracies[contestant][8])+float(accuracies[contestant][9])) if accuracies[contestant][8]+accuracies[contestant][9]!=0 else "N/A"
+			finalJeopardyAccuracy = 100*float(accuracies[contestant][6])/(float(accuracies[contestant][6])+float(accuracies[contestant][7])) if accuracies[contestant][6]+accuracies[contestant][7]!=0 else -1
+			tiebreakerAccuracy = 100*float(accuracies[contestant][8])/(float(accuracies[contestant][8])+float(accuracies[contestant][9])) if accuracies[contestant][8]+accuracies[contestant][9]!=0 else -1
 			#Special cases where they did not buzz in at all (losers)
-			j_accuracy = 100*float(accuracies[contestant][2])/(float(accuracies[contestant][2])+float(accuracies[contestant][3])) if accuracies[contestant][2]+accuracies[contestant][3]!=0 else "Did Not Buzz"
-			dj_accuracy = 100*float(accuracies[contestant][4])/(float(accuracies[contestant][4])+float(accuracies[contestant][5])) if accuracies[contestant][4]+accuracies[contestant][5]!=0 else "Did Not Buzz"
+			
+			j_accuracy = 100*float(accuracies[contestant][2])/(float(accuracies[contestant][2])+float(accuracies[contestant][3])) if accuracies[contestant][2]+accuracies[contestant][3]!=0 else -1
+			dj_accuracy = 100*float(accuracies[contestant][4])/(float(accuracies[contestant][4])+float(accuracies[contestant][5])) if accuracies[contestant][4]+accuracies[contestant][5]!=0 else -1
 			profiles.append({
-				"contestant": contestant,
+				"name": contestant,
 				"firstAppearance": appearances[contestant][0],
 				"lastAppearance": appearances[contestant][1],
-				"Wins": appearances[contestant][2],
+				"wins": appearances[contestant][2],
 				"numberCorrect": accuracies[contestant][0],
 				"numberIncorrect": accuracies[contestant][1],
 				"overallAccuracy": 100*float(accuracies[contestant][0])/(float(accuracies[contestant][0])+float(accuracies[contestant][1])),
-				"J-Accuracy": j_accuracy,
-				"DJ-Accuracy": dj_accuracy,
-				"FJ-Accuracy": finalJeopardyAccuracy,
-				"Tiebreak-Accuracy": tiebreakerAccuracy,
-				"Correct/Game": float(accuracies[contestant][0])/float(appearances[contestant][2]+1),
-				"J-Correct": accuracies[contestant][2],
-				"J-Incorrect": accuracies[contestant][3],
-				"DJ-Correct": accuracies[contestant][4],
-				"DJ-Incorrect": accuracies[contestant][5],
-				"FJ-Correct": accuracies[contestant][6],
-				"FJ-Incorrect": accuracies[contestant][7],
-				"Tiebreak-Correct": accuracies[contestant][8],
-				"Tiebreak-Incorrect": accuracies[contestant][9]
+				"JAccuracy": j_accuracy,
+				"DJAccuracy": dj_accuracy,
+				"FJAccuracy": finalJeopardyAccuracy,
+				"TiebreakAccuracy": tiebreakerAccuracy,
+				"CorrectPerGame": float(accuracies[contestant][0])/float(appearances[contestant][2]+1),
+				"JCorrect": accuracies[contestant][2],
+				"JIncorrect": accuracies[contestant][3],
+				"DJCorrect": accuracies[contestant][4],
+				"DJIncorrect": accuracies[contestant][5],
+				"FJCorrect": accuracies[contestant][6],
+				"FJIncorrect": accuracies[contestant][7],
+				"TiebreakCorrect": accuracies[contestant][8],
+				"TiebreakIncorrect": accuracies[contestant][9]
 			})
 	return profiles
 
