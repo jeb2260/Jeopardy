@@ -16,8 +16,8 @@ def main():
 	podiumfile = os.path.join(FOLDER,'podium-data.csv')
 	tournfile = os.path.join(FOLDER, 'tournament-episodes.csv')
 	contestantfile = os.path.join(FOLDER, 'contestant-profiles.csv')
-	contestantData = create_contestant_profiles(podiumfile,tournfile)
-	write_to_csv(contestantfile,contestantData)
+	contestantjson = os.path.join(FOLDER,'contestantjson.txt')
+	create_contestant_profiles(podiumfile,contestantjson)
 
 #Create that file with all of the contestants
 #Stuff currently implemented: appearances/victories, accuracy %
@@ -33,7 +33,7 @@ def create_contestant_profiles(podiumFile,tournamentsFile):
 	#								       num_tiebreak_correct, num_tiebreak_incorrect]}
 	accuracies = dict()
 
-	profiles = []
+	profiles = {}
 
 	with open(podiumFile,'r',newline='',encoding='utf-8') as csvfile:
 		csv_reader = csv.reader(csvfile)
@@ -172,8 +172,7 @@ def create_contestant_profiles(podiumFile,tournamentsFile):
 			
 			j_accuracy = 100*float(accuracies[contestant][2])/(float(accuracies[contestant][2])+float(accuracies[contestant][3])) if accuracies[contestant][2]+accuracies[contestant][3]!=0 else -1
 			dj_accuracy = 100*float(accuracies[contestant][4])/(float(accuracies[contestant][4])+float(accuracies[contestant][5])) if accuracies[contestant][4]+accuracies[contestant][5]!=0 else -1
-			profiles.append({
-				"name": contestant,
+			profiles[contestant]={
 				"firstAppearance": appearances[contestant][0],
 				"lastAppearance": appearances[contestant][1],
 				"wins": appearances[contestant][2],
@@ -193,8 +192,9 @@ def create_contestant_profiles(podiumFile,tournamentsFile):
 				"FJIncorrect": accuracies[contestant][7],
 				"TiebreakCorrect": accuracies[contestant][8],
 				"TiebreakIncorrect": accuracies[contestant][9]
-			})
-	return profiles
+			}
+	with open('data.txt', 'w') as outfile:
+		json.dump(profiles, outfile, indent=4)
 
 
 def write_to_csv(filename, data):
