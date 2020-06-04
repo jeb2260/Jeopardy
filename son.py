@@ -193,7 +193,7 @@ def create_contestant_profiles(podiumFile,tournamentsFile):
 				"TiebreakCorrect": accuracies[contestant][8],
 				"TiebreakIncorrect": accuracies[contestant][9]
 			}
-	with open('data.txt', 'w') as outfile:
+	with open(contestantjson, 'w') as outfile:
 		json.dump(profiles, outfile, indent=4)
 
 
