@@ -1,0 +1,124 @@
+.App {
+  text-align: center;
+}
+
+@font-face{
+  font-family: korinna;
+  src: url(Korinna.ttf);
+}
+
+.App-header {
+  background-color: #F0F8FF;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: black;
+}
+
+.App-footer {
+  background-color: #FFF8DC;
+  text-align: left;
+}
+
+.App-link {
+  color: black;
+}
+
+.bottom {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #F0F8FF;
+  height:5em;
+}
+
+.container {
+  display:flex;
+  flex-wrap: row wrap;
+  justify-content: space-between;
+}
+
+.chart {
+  border: 3px solid #73AD21;
+  width: 950px;
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.other {
+  width: 50%;
+}
+
+.category1 {
+  font-family: korinna;
+  color : white;
+  position: absolute;
+  bottom: 30px;
+  left: 330px;
+}
+
+.category2 {
+  font-family: korinna;
+  color : white;
+  position: absolute;
+  bottom: 30px;
+  left: 435px;
+}
+
+.category3 {
+  font-family: korinna;
+  color : white;
+  position: absolute;
+  bottom: 30px;
+  left: 555px;
+}
+
+.category4 {
+  font-family: korinna;
+  color : white;
+  position: absolute;
+  bottom: 30px;
+  left: 650px;
+}
+
+.category5 {
+  font-family: korinna;
+  color : white;
+  position: absolute;
+  bottom: 30px;
+  left: 760px;
+}
+
+.category6 {
+  font-family: korinna;
+  color : white;
+  position: absolute;
+  bottom: 20px;
+  left: 880px;
+}
+
+footer {
+  color: white;
+  position: relative;
+  display: flex;
+  background-color: #F0F8FF;
+  justify-content: space-between;
+}
+
+.twitterIcon {
+  background-color: #F0F8FF;
+  height: 2vmin;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
